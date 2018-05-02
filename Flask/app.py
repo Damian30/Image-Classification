@@ -1,11 +1,13 @@
-from flask import Flask, render_template, jsonify, redirect, request
+from flask import Flask, render_template, jsonify, redirect, request, redirect, url_for, send_from_directory
 import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__, static_url_path='/static')
 
 UPLOAD_FOLDER = os.path.basename('uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-ALLOWED_EXTENSIONS = set(['.png', '.jpg', '.jpeg', '.gif'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -27,13 +29,20 @@ def upload_file():
         if file.filename == '':
             print('No selected file')
             return redirect(request.url)
+        if not allowed_file(file.filename):
+            print('Not an allowed extension of file')
+            return redirect(request.url)
         if file and allowed_file(file.filename):
-            file = request.files['image']
-            f = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-            file.save(f) 
+            #print("I am inside the main loop")
+            file = request.files['file']
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file',filename=filename))
     return render_template('index.html')
 
-    # add your custom code to check that the uploaded file is a valid image and what type of pet is in store
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
 
 if __name__ == "__main__":
     app.run(debug=True)

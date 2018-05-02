@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pet Images classification</title>
+  <link rel= "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+  <link href="/static/css/style.css" rel="stylesheet">
+  <a class="navbar-brand" href="#"><img src="/static/images/background.jpeg" height: 50%></a> 
+</head>
+
+<body>
+    <div class="jumbotron text-center">
+        <h1 align = "center">Pet Images classification</h1>
+      </div>
+<header class="navbar">
+  <h3 align = "center">Want to classify your pet? Please upload an image in a JPEG format"</h3>
+  <form action="/upload" method="post" enctype="multipart/form-data" >
+      <span class="btn btn-default btn-file">
+          <!-- <p><input type=file name=file> -->
+        Browse <input type=file name =file>
+      </span>
+
+    <input type="submit" value="Upload your image" class="btn btn-primary">
+  </form>
+</header>
+</body>
+</html>
+

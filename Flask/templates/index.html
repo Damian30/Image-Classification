@@ -5,15 +5,19 @@
   <title>Pet Images classification</title>
   <link rel= "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
   <link href="/static/css/style.css" rel="stylesheet">
-  <a class="navbar-brand" href="#"><img src="/static/images/background.jpeg" height: 50%></a> 
 </head>
 
 <body>
     <div class="jumbotron text-center">
-        <h1 align = "center">Pet Images classification</h1>
-      </div>
+        <!-- <div class="col-lg-4 col-md-4 col-sm-4 box-left"> -->
+            <a class="navbar-brand" href="#"><img src="/static/images/background.jpeg"></a> 
+            <!-- </div> -->
+        <!-- <div class="col-lg-8 col-md-8 col-sm-8 box-right">    -->
+          <h1 align = "center">Pet Images classification</h1>
+        <!-- </div> -->
+    </div>
 <header class="navbar">
-  <h3 align = "center">Want to classify your pet? Please upload an image in a JPEG format"</h3>
+  <h3 align = "center">Want to classify your pet? Please upload an image in any of following formats - JPEG/JPG/GIF/PNG"</h3>
   <form action="/upload" method="post" enctype="multipart/form-data" >
       <span class="btn btn-default btn-file">
           <!-- <p><input type=file name=file> -->

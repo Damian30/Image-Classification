@@ -1,6 +1,9 @@
 from flask import Flask, render_template, jsonify, redirect, request, redirect, url_for, send_from_directory
 import os
 from werkzeug.utils import secure_filename
+import training
+import numpy as np
+from keras.preprocessing import image
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -37,7 +40,20 @@ def upload_file():
             file = request.files['file']
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',filename=filename))
+
+            with training.graph.as_default():
+
+                test_image = image.load_img('uploads/' + filename, target_size = (64, 64))
+                test_image = image.img_to_array(test_image)
+                test_image = np.expand_dims(test_image, axis = 0)
+                result = training.classifier.predict(test_image)
+
+                S = [['bird', result[0][0]], ['cat', result[0][1]], ['dog', result[0][2]]]
+
+                answer = sorted(S, key = lambda x : x[1], reverse = True)[0][0]
+
+                return render_template('answer.html', answer=answer, filename=filename)
+                
     return render_template('index.html')
 
 @app.route('/uploads/<filename>')

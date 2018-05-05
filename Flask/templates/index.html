@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <title>Pet Images classification</title>
   <link rel= "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
-  <link href="/static/css/style.css" rel="stylesheet">
+  <link rel="stylesheet"  type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
 </head>
 
 <body>
     <div class="jumbotron text-center">
         <!-- <div class="col-lg-4 col-md-4 col-sm-4 box-left"> -->
-            <a class="navbar-brand" href="#"><img src="/static/images/background.jpeg"></a> 
+            <a class="navbar-brand" href="#"><img src="/static/images/classification.gif"></a> 
             <!-- </div> -->
         <!-- <div class="col-lg-8 col-md-8 col-sm-8 box-right">    -->
           <h1 align = "center">Pet Images classification</h1>
@@ -21,9 +21,8 @@
   <form action="/upload" method="post" enctype="multipart/form-data" >
       <span class="btn btn-default btn-file">
           <!-- <p><input type=file name=file> -->
-        Browse <input type=file name =file>
+         <input type=file name =file> 
       </span>
-
     <input type="submit" value="Upload your image" class="btn btn-primary">
   </form>
 </header>
